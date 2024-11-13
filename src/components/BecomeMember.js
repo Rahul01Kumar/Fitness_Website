@@ -1,6 +1,7 @@
 // BecomeMember.js
 import React, { useState } from 'react';
 import './BecomeMember.css';
+import bg from '../assets/img_1.jpg';  // Import the background image
 
 const BecomeMember = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +22,17 @@ const BecomeMember = () => {
   };
 
   return (
-    <div id="member-section" className="member-section">
+    <div
+      id="member-section"
+      className="member-section"
+      style={{
+        backgroundImage: `url(${bg})`,  // Set the background image
+        backgroundSize: 'cover',        // Ensure the background covers the full div
+        backgroundPosition: 'center',   // Center the background image
+        padding: '40px',                // Add some padding for better content visibility
+        color: 'white'                  // Ensure the text is readable on the background
+      }}
+    >
       <h2>Become a Member</h2>
       <p>Join us and start your journey to a healthier you!</p>
       <form onSubmit={handleSubmit} className="member-form">

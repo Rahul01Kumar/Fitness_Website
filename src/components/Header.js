@@ -1,32 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Button from "./reusable/Button";
 import Logo from "./reusable/Logo";
 
 const menusData = [
-  {
-    id: 1,
-    name: "Home",
-  },
-  {
-    id: 2,
-    name: "About",
-  },
-
-  {
-    id: 3,
-    name: "Services",
-  },
-
-  {
-    id: 4,
-    name: "Schedule",
-  },
-  {
-    id: 5,
-    name: "Contact",
-  },
+  { id: 1, name: "Home", path: "/" },
+  { id: 2, name: "About", path: "/about" },
+  { id: 3, name: "Services", path: "/services" },
+  { id: 4, name: "Schedule", path: "/schedule" },
+  { id: 5, name: "Contact", path: "/contact" },
 ];
+
 export default function Header() {
   return (
     <Box>
@@ -35,12 +20,15 @@ export default function Header() {
       </Left>
       <Right>
         <Menus>
-          {menusData.map((_, index) => {
-            return <Menu>{_.name}</Menu>;
-          })}
+          {menusData.map((menu) => (
+            <Link key={menu.id} to={menu.path} style={{ textDecoration: "none" }}>
+              <Menu>{menu.name}</Menu>
+            </Link>
+          ))}
         </Menus>
-
-        <Button>Became a member</Button>
+        <Link to="/BecomeMember">
+          <Button>Became a member</Button>
+        </Link>
       </Right>
     </Box>
   );

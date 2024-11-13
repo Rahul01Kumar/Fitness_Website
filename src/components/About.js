@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom"; // Import Link for navigation
 import bg from "../assets/img_9.webp";
 import Button from "./reusable/Button";
 import H1 from "./reusable/H1";
@@ -20,18 +21,20 @@ export default function About() {
         </H1>
 
         <H2>
-          Brook presents your services with flexible, convenient and cdpose
-          layouts. You can select your favorite layouts & elements for cular ts
-          with unlimited ustomization possibilities. Pixel-perfect replication
-          of the designers is intended.
+          Brook presents your services with flexible, convenient, and composed
+          layouts. You can select your favorite layouts & elements for circular
+          customization possibilities. Pixel-perfect replication of the design is intended.
         </H2>
 
         <Paragraph>
-          Brook presents your services with flexible, convefnient and chient
-          anipurpose layouts. You can select your favorite layouts.
+          Brook presents your services with flexible, convenient, and efficient
+          multipurpose layouts. You can select your favorite layouts.
         </Paragraph>
 
-        <Button style={{ marginTop: 30 }}>Became a member</Button>
+        {/* Link to BecomeMember component */}
+        <Link to="/BecomeMember" style={{ textDecoration: "none" }}>
+          <Button style={{ marginTop: 30 }}>Become a Member</Button>
+        </Link>
       </Right>
     </Container>
   );
@@ -50,13 +53,14 @@ const Left = styled.div`
   width: 50%;
   height: 100%;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 `;
+
 const Right = styled.div`
   width: 45%;
 `;
+
 const Image = styled.img`
   width: 70%;
   height: 80%;

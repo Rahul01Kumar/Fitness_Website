@@ -1,45 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import bg from "../assets/img_1.jpg";
+import { Link } from "react-router-dom"; 
+import bg from "../assets/img_6.jpg";
 import Button from "./reusable/Button";
 import H1 from "./reusable/H1";
 import WithBarTitle from "./reusable/WithBarTitle";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaPause } from "react-icons/fa";
 import Header from "./Header";
+import vd_1 from "../assets/vd_1.mp4"; 
 
 export default function Banner() {
-  // Function to scroll to the "Become a Member" section
-  const handleScroll = () => {
-    const section = document.getElementById("become-member");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleVideoToggle = () => {
+    const video = document.getElementById("banner-video");
+    if (isPlaying) {
+      video.pause();
+    } else {
+      video.play();
     }
+    setIsPlaying(!isPlaying);
   };
 
   return (
     <Main>
-      
-      {/* <Video poster={bg} autoPlay playsInline muted loop>
-        <source
-          src="https://css-tricks-post-videos.s3.us-east-1.amazonaws.com/Island%20-%204141.mp4"
-          type="./asset/vd_1.mp4"
-        />
-      </Video> */}
       <Header />
 
       <Container>
         <RightBox>
           <WithBarTitle title="WITH Fitness Guru" />
           <H1>Build Perfect body shape for good and healthy life.</H1>
-          {/* Attach scroll function to button */}
-          <Button onClick={handleScroll} animation="fadeInLeft">
-            Become a Member
-          </Button>
+          
+          <Link to="/BecomeMember" style={{ textDecoration: "none" }}>
+            <Button animation="fadeInLeft">Become a Member</Button>
+          </Link>
         </RightBox>
+        
         <LeftBox>
           <Circle>
-            <CircleButton>
-              <FaPlay />
+            {/* Add the video inside the Circle component */}
+            <video
+              id="banner-video"
+              width="100%"
+              height="100%"
+              style={{ borderRadius: "50%" }}
+              muted
+            >
+              <source src={vd_1} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <CircleButton onClick={handleVideoToggle}>
+              {isPlaying ? <FaPause /> : <FaPlay />}
             </CircleButton>
           </Circle>
         </LeftBox>
@@ -81,6 +92,7 @@ const RightBox = styled.div`
 `;
 
 const Circle = styled.div`
+  position: relative;
   border: 2px solid red;
   width: 100px;
   height: 100px;
@@ -100,4 +112,11 @@ const CircleButton = styled.button`
   border-radius: 50%;
   border: none;
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
 `;
